@@ -1,4 +1,5 @@
 import AddToCart from '$lib/components/add-to-cart';
+import Drawer from '$lib/components/drawer';
 import Header from '$lib/components/header';
 import ProductAmount from '$lib/components/product-amount';
 import ProductCarousel from '$lib/components/product-carousel';
@@ -7,6 +8,7 @@ function App() {
 	return (
 		<div className="prose max-w-none prose-img:m-0">
 			<Header />
+			<Drawer />
 			<main>
 				<ProductCarousel />
 				<div className="p-6 mb-10">
