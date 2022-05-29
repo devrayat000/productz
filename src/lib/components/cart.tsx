@@ -90,21 +90,19 @@ function CartItem({ item }: CartItemProps) {
 	return (
 		<article
 			key={item.id}
-			className="flex justify-between flex-nowrap items-center gap-3 prose-img:h-12"
+			className="flex justify-between flex-nowrap items-center gap-3 p-1 hover:bg-slate-50 transition-colors"
 		>
-			<img src={item.imageUrl} alt={item.name} className="my-0 rounded" />
+			<img src={item.imageUrl} alt={item.name} className="my-0 rounded h-12" />
 			<div className="flex-grow-0">
-				<h6 className="my-0 text-left text-neutral-dark-grayish-blue max-w-[20ch] text-ellipsis">
-					{item.name}
-				</h6>
+				<h6 className="my-0 text-left text-neutral-dark-grayish-blue line-clamp-1">{item.name}</h6>
 				<p className="my-0 text-left text-neutral-dark-grayish-blue">
 					${item.price.toFixed(2)} x {item.amount}
 					&nbsp;&nbsp;
 					<span className="font-bold text-black">${(item.price * item.amount).toFixed(2)}</span>
 				</p>
 			</div>
-			<button type="button" onClick={() => removeFromCart(item.id)} className="prose-img:!h-5">
-				<img src="/images/icon-delete.svg" alt="Remove from cart" />
+			<button type="button" onClick={() => removeFromCart(item.id)}>
+				<img src="/images/icon-delete.svg" alt="Remove from cart" className="h-5" />
 			</button>
 		</article>
 	);
@@ -141,7 +139,7 @@ const CartButton = (props: Props) => {
 
 	return (
 		<button type="button" className="relative" onClick={() => toggleCart()}>
-			<img src="images/icon-cart.svg" alt="Cart" />
+			<img src="images/icon-cart.svg" alt="Cart" className="h-5" />
 			<AnimatePresence>
 				{isCartOpen && (
 					<m.section
@@ -149,7 +147,7 @@ const CartButton = (props: Props) => {
 						initial="hidden"
 						animate="show"
 						exit="hidden"
-						className="fixed left-0 right-0 top-16 my-4 mx-2 rounded-md p-5 bg-white flex flex-col gap-4 shadow-xl"
+						className="fixed right-0 left-0 md:left-auto max-w-sm top-16 my-4 mx-2 rounded-md p-5 bg-white flex flex-col gap-4 shadow-xl"
 					>
 						<h3 className="my-0 text-left">Cart</h3>
 						<hr className="my-0" />

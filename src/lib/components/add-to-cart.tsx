@@ -2,7 +2,7 @@ const AddToCart = () => {
 	return (
 		<button
 			type="button"
-			className="bg-primary py-3 px-6 w-full rounded-lg text-white font-bold flex justify-center items-center shadow-lg shadow-primary gap-4"
+			className="bg-primary py-3 px-6 w-full rounded-lg text-white font-bold flex justify-center items-center shadow-md hover:shadow-lg transition-shadow shadow-primary gap-4"
 		>
 			<span>
 				<svg width="22" height="20" className="scale-75" xmlns="http://www.w3.org/2000/svg">

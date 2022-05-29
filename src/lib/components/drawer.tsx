@@ -1,6 +1,7 @@
 import { useStoreActions, useStoreState } from '$lib/store';
 import { AnimatePresence, m, type Variants } from 'framer-motion';
 import Backdrop from './backdrop';
+import NavLinks from './nav-links';
 
 const drawer: Variants = {
 	hidden: {
@@ -40,21 +41,7 @@ const Drawer = () => {
 								</button>
 							</div>
 							<div className="flex flex-col gap-4 prose-a:no-underline prose-a:font-bold">
-								<a href="#" className="font-bold">
-									Collections
-								</a>
-								<a href="#" className="font-bold">
-									Men
-								</a>
-								<a href="#" className="font-bold">
-									Women
-								</a>
-								<a href="#" className="font-bold">
-									About
-								</a>
-								<a href="#" className="font-bold">
-									Contact
-								</a>
+								{NavLinks()}
 							</div>
 						</div>
 					</m.aside>
