@@ -10,6 +10,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	// <React.StrictMode>
 	<LazyMotion strict features={() => import('framer-motion').then((r) => r.domAnimation)}>
+		{/* @ts-ignore */}
 		<StoreProvider store={store}>
 			<App />
 		</StoreProvider>
