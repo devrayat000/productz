@@ -1,28 +1,21 @@
-import { action, unstable_effectOn, type Unstable_EffectOn, type Action } from 'easy-peasy';
-import { StoreModel } from '.';
+import { StateCreator } from 'zustand';
 
-export interface DrawerStore {
-	in: boolean;
-	open: Action<this>;
-	close: Action<this>;
-	// onToggle: Unstable_EffectOn<this, StoreModel>;
-}
+import { DrawerStore } from './state';
 
-export const drawerStore: DrawerStore = {
-	in: false,
-	open: action((state) => {
-		state.in = true;
-	}),
-	close: action((state) => {
-		state.in = false;
-	})
-	// onToggle: unstable_effectOn([(state) => state.in], (action, change, helpers) => {
-	// 	const open = change.current[0];
-	// 	if (open) {
-	// 		document.body.style.overflow = 'hidden';
-	// 	} else {
-	// 		document.body.removeAttribute('style');
-	// 	}
-	// 	return undefined;
-	// })
-};
+export const createDrawerStore: StateCreator<
+	{ drawer: DrawerStore },
+	[['zustand/devtools', never], ['zustand/subscribeWithSelector', never]]
+> = (set) => ({
+	drawer: {
+		in: false,
+		toggle(state) {
+			set((prev) => ({
+				...prev,
+				drawer: {
+					...prev.drawer,
+					in: state ?? !prev.drawer.in
+				}
+			}));
+		}
+	}
+});

@@ -1,7 +1,26 @@
-const AddToCart = () => {
+import { useAppStore } from '$lib/store';
+import { useState } from 'react';
+import ProductAmount from './product-amount';
+
+interface AddToCartButtonProps {
+	count: number;
+}
+
+const AddToCartButton = ({ count }: AddToCartButtonProps) => {
+	const addToCart = useAppStore((store) => store.cart.addToCart);
+
 	return (
 		<button
 			type="button"
+			onClick={() =>
+				addToCart({
+					id: 'kgb',
+					name: 'Autumn Limited Edition Sneakers',
+					price: 125.0,
+					amount: count,
+					imageUrl: '/images/image-product-1-thumbnail.jpg'
+				})
+			}
 			className="bg-primary py-3 px-6 w-full rounded-lg text-white font-bold flex justify-center items-center shadow-md hover:shadow-lg transition-shadow shadow-primary gap-4"
 		>
 			<span>
@@ -17,5 +36,28 @@ const AddToCart = () => {
 		</button>
 	);
 };
+
+function AddToCart() {
+	const [count, setCount] = useState(0);
+
+	function increment() {
+		setCount((prev) => prev + 1);
+	}
+
+	function decrement() {
+		setCount((prev) => (prev <= 0 ? 0 : prev - 1));
+	}
+
+	return (
+		<div className="flex flex-col md:flex-row items-stretch gap-4">
+			<div className="md:flex-grow-[2]">
+				<ProductAmount count={count} increment={increment} decrement={decrement} />
+			</div>
+			<div className="md:flex-grow-[3]">
+				<AddToCartButton count={count} />
+			</div>
+		</div>
+	);
+}
 
 export default AddToCart;

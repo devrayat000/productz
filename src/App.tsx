@@ -1,10 +1,27 @@
+import { useEffect } from 'react';
+
 import AddToCart from '$lib/components/add-to-cart';
 import Drawer from '$lib/components/drawer';
 import Header from '$lib/components/header';
-import ProductAmount from '$lib/components/product-amount';
 import ProductCarousel from '$lib/components/product-carousel';
+import { useAppStore } from '$lib/store';
 
 function App() {
+	useEffect(() => {
+		return useAppStore.subscribe(
+			(store) => [store.cart.in, store.drawer.in],
+			(curr) => {
+				const isOpen = curr.some((c) => c);
+
+				if (isOpen) {
+					document.body.style.overflow = 'hidden';
+				} else {
+					document.body.removeAttribute('style');
+				}
+			}
+		);
+	}, []);
+
 	return (
 		<div className="prose max-w-none prose-img:m-0">
 			<Header />
@@ -32,14 +49,7 @@ function App() {
 								</div>
 								<span className="text-neutral-grayish-blue font-bold line-through">$250.00</span>
 							</div>
-							<div className="flex flex-col md:flex-row items-stretch gap-4">
-								<div className="md:flex-grow-[2]">
-									<ProductAmount />
-								</div>
-								<div className="md:flex-grow-[3]">
-									<AddToCart />
-								</div>
-							</div>
+							<AddToCart />
 						</section>
 					</article>
 				</div>
